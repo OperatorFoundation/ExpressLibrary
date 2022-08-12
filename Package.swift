@@ -9,6 +9,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/OperatorFoundation/Chord", branch: "main"),
         .package(url: "https://github.com/OperatorFoundation/Datable", branch: "main"),
+        .package(url: "https://github.com/OperatorFoundation/Gardener", branch: "main"),
         .package(url: "https://github.com/armadsen/ORSSerialPort.git", from: "2.1.0"),
         .package(url: "https://github.com/OperatorFoundation/Straw", branch: "main"),
     ],
@@ -18,6 +19,7 @@ let package = Package(
             dependencies: [
                 "Chord",
                 "Datable",
+                "Gardener",
                 .product(name: "ORSSerial", package: "ORSSerialPort"),
                 "Straw",
             ],
