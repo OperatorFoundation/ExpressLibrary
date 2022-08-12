@@ -7,18 +7,19 @@ let package = Package(
        .macOS(.v12)
     ],
     dependencies: [
-        // 💧 A server-side Swift web framework.
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
-        .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
-        .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0"),
+        .package(url: "https://github.com/OperatorFoundation/Chord", branch: "main"),
+        .package(url: "https://github.com/OperatorFoundation/Datable", branch: "main"),
+        .package(url: "https://github.com/armadsen/ORSSerialPort.git", from: "2.1.0"),
+        .package(url: "https://github.com/OperatorFoundation/Straw", branch: "main"),
     ],
     targets: [
         .target(
-            name: "App",
+            name: "ExpressLibrary",
             dependencies: [
-                .product(name: "Fluent", package: "fluent"),
-                .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
-                .product(name: "Vapor", package: "vapor")
+                "Chord",
+                "Datable",
+                .product(name: "ORSSerial", package: "ORSSerialPort"),
+                "Straw",
             ],
             swiftSettings: [
                 // Enable better optimizations when building in Release configuration. Despite the use of
@@ -27,10 +28,8 @@ let package = Package(
                 .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
             ]
         ),
-        .executableTarget(name: "Run", dependencies: [.target(name: "App")]),
-        .testTarget(name: "AppTests", dependencies: [
-            .target(name: "App"),
-            .product(name: "XCTVapor", package: "vapor"),
+        .testTarget(name: "ExpressLibraryTests", dependencies: [
+            .target(name: "ExpressLibrary"),
         ])
     ]
 )
